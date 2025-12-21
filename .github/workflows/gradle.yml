@@ -13,7 +13,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '11'
-          distribution: 'adopt'
+          distribution: 'temurin'
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -21,7 +21,12 @@ jobs:
       - name: Start SUT (System Under Test)
         run: |
           java -jar app-ibank-build-for-testers.jar &
-          sleep 60
+          echo "Application started in background, waiting..."
+          sleep 120
+
+      - name: Check if App is running (Debug step)
+        run: |
+          curl -v http://localhost:9999 || echo "App is NOT responding!"
 
       - name: Build with Gradle
         run: ./gradlew test
