@@ -7,21 +7,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
-        with:
-          java-version: '11'
-          distribution: 'adopt'
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'temurin'
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
 
-      - name: Start SUT (System Under Test)
-        run: |
-          java -jar app-ibank-build-for-testers.jar &
-          sleep 90
+    - name: Start SUT (System Under Test)
+      run: |
+        java -jar app-ibank-build-for-testers.jar &
+        echo "Application started in background, waiting..."
+        sleep 120
 
-      - name: Build with Gradle
-        run: ./gradlew test
+    - name: Check if App is running (Debug step)
+      run: |
+        curl -v http://localhost:9999 || echo "App is NOT responding!"
+
+    - name: Build with Gradle
+      run: ./gradlew test
