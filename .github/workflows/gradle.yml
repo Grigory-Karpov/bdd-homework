@@ -21,7 +21,7 @@ jobs:
       - name: Start SUT (System Under Test)
         run: |
           java -jar app-ibank-build-for-testers.jar &
-          sleep 15
+          sleep 60
 
       - name: Build with Gradle
         run: ./gradlew test
