@@ -18,8 +18,18 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    // Пункт 3: Передаем параметр headless из командной строки
+    // Настраиваем headless режим
     systemProperty 'selenide.headless', System.getProperty('selenide.headless')
-    // Пункт 4: Отключаем лишние уведомления браузера
+
+    // ВАЖНО: Увеличиваем время ожидания до 15 секунд (стандартные 4 сек серверу мало)
+    systemProperty 'selenide.timeout', System.getProperty('selenide.timeout', '15000')
+
+    // Настройки Chrome (отключаем лишние уведомления)
     systemProperty 'chromeoptions.prefs', System.getProperty('chromeoptions.prefs', "profile.password_manager_leak_detection=false")
+}
+
+// Кодировка, чтобы русский текст не ломался
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
