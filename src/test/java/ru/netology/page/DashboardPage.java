@@ -1,16 +1,13 @@
 package ru.netology.page;
 
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.val;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 
 public class DashboardPage {
-    private SelenideElement heading = $("[data-test-id=dashboard]");
-    private ElementsCollection cards = $$(".list__item div");
+    private final SelenideElement heading = $("[data-test-id=dashboard]");
     private final String balanceStart = "баланс: ";
     private final String balanceFinish = " р.";
 
@@ -19,15 +16,15 @@ public class DashboardPage {
     }
 
     public int getCardBalance(String id) {
-        // Ищем карту по атрибуту data-test-id
-        val text = cards.findBy(com.codeborne.selenide.Condition.attribute("data-test-id", id)).text();
+        // Ищем элемент напрямую по его ID.
+        // Selenide будет ждать именно этот элемент до 15 секунд.
+        val text = $("[data-test-id='" + id + "']").text();
         return extractBalance(text);
     }
 
     public TransferPage selectCardToTransfer(String id) {
-        // Ищем кнопку "Пополнить" именно у той карты, ID которой передали
-        cards.findBy(com.codeborne.selenide.Condition.attribute("data-test-id", id))
-                .$("button").click();
+        // Ищем кнопку "Пополнить" внутри конкретной карты
+        $("[data-test-id='" + id + "'] button").click();
         return new TransferPage();
     }
 
