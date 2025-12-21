@@ -1,6 +1,5 @@
 package ru.netology.test;
 
-import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
 import ru.netology.page.LoginPage;
@@ -12,10 +11,10 @@ class MoneyTransferTest {
 
     @Test
     void shouldTransferMoneyBetweenOwnCards() {
-        Configuration.headless = true;
-        Configuration.timeout = 15000;
+        // Открываем страницу приложения.
+        // Используем 127.0.0.1 вместо localhost, так как на серверах CI это работает стабильнее.
+        var loginPage = open("http://127.0.0.1:9999", LoginPage.class);
 
-        var loginPage = open("http://localhost:9999", LoginPage.class);
         var authInfo = DataHelper.getAuthInfo();
         var verificationPage = loginPage.validLogin(authInfo);
         var verificationCode = DataHelper.getVerificationCode();

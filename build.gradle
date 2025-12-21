@@ -18,5 +18,8 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    systemProperty 'selenide.headless', 'true' // Запуск без открытия окна браузера (быстрее)
+    // Пункт 3: Передаем параметр headless из командной строки
+    systemProperty 'selenide.headless', System.getProperty('selenide.headless')
+    // Пункт 4: Отключаем лишние уведомления браузера
+    systemProperty 'chromeoptions.prefs', System.getProperty('chromeoptions.prefs', "profile.password_manager_leak_detection=false")
 }

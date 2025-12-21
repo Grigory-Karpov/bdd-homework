@@ -19,10 +19,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Start SUT
-        run: |
-          java -jar app-ibank-build-for-testers.jar &
-          echo "SUT started in background"
-          sleep 120
+        run: java -jar app-ibank-build-for-testers.jar &
 
       - name: Build with Gradle
-        run: ./gradlew test -Dselenide.headless=true
+        run: ./gradlew test -Dselenide.headless=true --info
