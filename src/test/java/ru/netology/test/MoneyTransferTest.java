@@ -11,8 +11,6 @@ class MoneyTransferTest {
 
     @Test
     void shouldTransferMoneyBetweenOwnCards() {
-        // Открываем страницу приложения.
-        // Используем 127.0.0.1 вместо localhost, так как на серверах CI это работает стабильнее.
         var loginPage = open("http://127.0.0.1:9999", LoginPage.class);
 
         var authInfo = DataHelper.getAuthInfo();
@@ -22,15 +20,19 @@ class MoneyTransferTest {
 
         var firstCardInfo = DataHelper.getFirstCardInfo();
         var secondCardInfo = DataHelper.getSecondCardInfo();
-        var firstCardBalance = dashboardPage.getCardBalance(firstCardInfo.getId());
-        var secondCardBalance = dashboardPage.getCardBalance(secondCardInfo.getId());
+
+        // ВАЖНО: Теперь передаем getNumber(), а не getId()
+        var firstCardBalance = dashboardPage.getCardBalance(firstCardInfo.getNumber());
+        var secondCardBalance = dashboardPage.getCardBalance(secondCardInfo.getNumber());
         var amount = 1000;
 
-        var transferPage = dashboardPage.selectCardToTransfer(secondCardInfo.getId());
+        // И здесь тоже getNumber()
+        var transferPage = dashboardPage.selectCardToTransfer(secondCardInfo.getNumber());
         dashboardPage = transferPage.makeValidTransfer(String.valueOf(amount), firstCardInfo);
 
-        var actualFirstCardBalance = dashboardPage.getCardBalance(firstCardInfo.getId());
-        var actualSecondCardBalance = dashboardPage.getCardBalance(secondCardInfo.getId());
+        // И здесь getNumber()
+        var actualFirstCardBalance = dashboardPage.getCardBalance(firstCardInfo.getNumber());
+        var actualSecondCardBalance = dashboardPage.getCardBalance(secondCardInfo.getNumber());
 
         assertEquals(firstCardBalance - amount, actualFirstCardBalance);
         assertEquals(secondCardBalance + amount, actualSecondCardBalance);
