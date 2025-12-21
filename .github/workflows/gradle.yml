@@ -25,4 +25,4 @@ jobs:
           sleep 120
 
       - name: Build with Gradle
-        run: ./gradlew test./gradlew test
+        run: ./gradlew test
