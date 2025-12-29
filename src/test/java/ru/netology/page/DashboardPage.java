@@ -3,6 +3,8 @@ package ru.netology.page;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -15,7 +17,8 @@ public class DashboardPage {
     private final String balanceFinish = " р.";
 
     public DashboardPage() {
-        heading.shouldBe(visible);
+        // Ждем загрузки заголовка до 30 секунд
+        heading.shouldBe(visible, Duration.ofSeconds(30));
     }
 
     public TransferPage selectCardToTransfer(String cardNumber) {
