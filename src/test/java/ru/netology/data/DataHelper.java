@@ -50,7 +50,8 @@ public class DataHelper {
     }
 
     public static AuthInfo getAuthInfo() {
-        return new AuthInfo("vasya", "qwerty1234"); // Данные из README (урок 2.4 BDD)
+        // ВАЖНО: Пароль qwerty123
+        return new AuthInfo("vasya", "qwerty123");
     }
 
     public static VerificationCode getVerificationCodeFor(AuthInfo authInfo) {
