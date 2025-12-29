@@ -19,7 +19,6 @@ public class DashboardPage {
     }
 
     public TransferPage selectCardToTransfer(String cardNumber) {
-        // Берем последние 4 цифры карты
         cards.findBy(text(cardNumber.substring(15, 19))).$("button").click();
         return new TransferPage();
     }
