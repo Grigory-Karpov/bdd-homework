@@ -1,5 +1,6 @@
 package ru.netology.test;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
@@ -11,6 +12,10 @@ class MoneyTransferTest {
 
     @Test
     void shouldTransferMoneyBetweenOwnCards() {
+        // Настройка для работы в GitHub Actions (CI)
+        // Задаем большой размер экрана, чтобы элементы не накладывались друг на друга
+        Configuration.browserSize = "1920x1080";
+
         var loginPage = open("http://localhost:9999", LoginPage.class);
 
         var authInfo = DataHelper.getAuthInfo();

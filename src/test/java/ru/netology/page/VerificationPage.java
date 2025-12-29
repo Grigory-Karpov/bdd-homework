@@ -16,7 +16,8 @@ public class VerificationPage {
 
     public DashboardPage validVerify(DataHelper.VerificationCode verificationCode) {
         codeField.setValue(verificationCode.getCode());
-        verifyButton.click();
+        // Ждем, пока кнопка станет видимой, прежде чем кликать
+        verifyButton.shouldBe(Condition.visible).click();
         return new DashboardPage();
     }
 }
