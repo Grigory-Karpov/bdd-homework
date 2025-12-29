@@ -1,6 +1,5 @@
 package ru.netology.test;
 
-import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
@@ -12,11 +11,7 @@ class MoneyTransferTest {
 
     @Test
     void shouldTransferMoneyBetweenOwnCards() {
-        // НАСТРОЙКИ ДЛЯ GITHUB ACTIONS
-        Configuration.browserSize = "1920x1080"; // Большой экран
-        Configuration.timeout = 20000;           // Ждем загрузки элементов до 20 секунд
-        Configuration.headless = true;           // Явно указываем headless режим
-
+        // Используем localhost вместо 127.0.0.1 или 0.0.0.0
         var loginPage = open("http://localhost:9999", LoginPage.class);
 
         var authInfo = DataHelper.getAuthInfo();

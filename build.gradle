@@ -10,22 +10,16 @@ repositories {
 }
 
 dependencies {
-    // JUnit 5
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0'
-    // Selenide
     testImplementation 'com.codeborne:selenide:6.17.2'
-    // Lombok УБРАН, чтобы не было конфликтов версий
 }
 
 test {
     useJUnitPlatform()
-    // Настройки для запуска в CI (безголовый режим)
+    // Оставляем только headless, таймаут убираем
     systemProperty 'selenide.headless', System.getProperty('selenide.headless')
-    // Увеличиваем таймаут, так как приложение медленное
-    systemProperty 'selenide.timeout', System.getProperty('selenide.timeout', '15000')
 }
 
-// Кодировка
 compileJava.options.encoding = 'UTF-8'
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'

@@ -17,8 +17,8 @@ public class DashboardPage {
     private final String balanceFinish = " р.";
 
     public DashboardPage() {
-        // Ждем загрузки заголовка до 30 секунд
-        heading.shouldBe(visible, Duration.ofSeconds(30));
+        // Требование преподавателя: указываем Duration в shouldBe
+        heading.shouldBe(visible, Duration.ofSeconds(15));
     }
 
     public TransferPage selectCardToTransfer(String cardNumber) {
