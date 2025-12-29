@@ -4,6 +4,8 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import ru.netology.data.DataHelper;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Selenide.$;
 
 public class VerificationPage {
@@ -16,8 +18,8 @@ public class VerificationPage {
 
     public DashboardPage validVerify(DataHelper.VerificationCode verificationCode) {
         codeField.setValue(verificationCode.getCode());
-        // Ждем, пока кнопка станет видимой, прежде чем кликать
-        verifyButton.shouldBe(Condition.visible).click();
+        // Ждем 15 секунд, чтобы кнопка точно стала кликабельной
+        verifyButton.shouldBe(Condition.visible, Duration.ofSeconds(15)).click();
         return new DashboardPage();
     }
 }

@@ -12,9 +12,10 @@ class MoneyTransferTest {
 
     @Test
     void shouldTransferMoneyBetweenOwnCards() {
-        // Настройка для работы в GitHub Actions (CI)
-        // Задаем большой размер экрана, чтобы элементы не накладывались друг на друга
-        Configuration.browserSize = "1920x1080";
+        // НАСТРОЙКИ ДЛЯ GITHUB ACTIONS
+        Configuration.browserSize = "1920x1080"; // Большой экран
+        Configuration.timeout = 20000;           // Ждем загрузки элементов до 20 секунд
+        Configuration.headless = true;           // Явно указываем headless режим
 
         var loginPage = open("http://localhost:9999", LoginPage.class);
 
