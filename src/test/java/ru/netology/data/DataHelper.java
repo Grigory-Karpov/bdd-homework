@@ -1,56 +1,30 @@
 package ru.netology.data;
 
+import lombok.Value;
+
 public class DataHelper {
     private DataHelper() {}
 
+    // Используем Lombok @Value (генерирует конструктор, геттеры, equals, hashCode, toString)
+    @Value
     public static class AuthInfo {
-        private final String login;
-        private final String password;
-
-        public AuthInfo(String login, String password) {
-            this.login = login;
-            this.password = password;
-        }
-
-        public String getLogin() {
-            return login;
-        }
-
-        public String getPassword() {
-            return password;
-        }
+        String login;
+        String password;
     }
 
+    @Value
     public static class VerificationCode {
-        private final String code;
-
-        public VerificationCode(String code) {
-            this.code = code;
-        }
-
-        public String getCode() {
-            return code;
-        }
+        String code;
     }
 
+    @Value
     public static class CardInfo {
-        private final String id;
-        private final String number;
-        private final int balance;
-
-        public CardInfo(String id, String number, int balance) {
-            this.id = id;
-            this.number = number;
-            this.balance = balance;
-        }
-
-        public String getNumber() {
-            return number;
-        }
+        String id;
+        String number;
+        int balance;
     }
 
     public static AuthInfo getAuthInfo() {
-        // ВАЖНО: Пароль qwerty123
         return new AuthInfo("vasya", "qwerty123");
     }
 
